@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 069e3ef7ce7c06c4884eeee123e5c7dd, type: 3}
   m_Name: docIntro
   m_EditorClassIdentifier: 
-  text: 'Hello fellow human!
+  text: 'Find my brothers 3 before going to the head.
 
-    It is dangerous to go alone!
-
-    Take this.'
+    We will remove what will remove what makes you weak.'
   next: {fileID: 11400000, guid: ac17d60bbc43cf845be12613fb02c78a, type: 2}
   options: []

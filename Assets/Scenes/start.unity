@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 848918a99d11f25f110026ca44295342, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -400,18 +400,17 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Welcome to LizeLive''s LD45 entry :)
+  m_Text: 'You start with nothing and will quickly starve.
 
+    Find doctors to sell limbs for powerups to get more food.
 
-    You are in a world where shops disapeared and you are quickly starving.
-
-    Thankfully kind doctors are here to help you by giving you augmations.
+    The pumkin has final boss. Be warned.
 
 
     WASD moves.
@@ -420,10 +419,9 @@ MonoBehaviour:
 
     O to get augmentations.
 
+    Q to attack
 
-    you can wall run
-
-    press E to start'
+    E to start'
 --- !u!222 &478891660
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityStandardAssets.Characters.ThirdPerson;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class Player : MonoBehaviour
 	public float superMoveSpeedMul = 1.5f;
 	public SkinnedMeshRenderer head, leg, arm, chest;
 	public Animator ac;
-	
+
 
 	public float baseDamage = 1;
 	public float superDamage = 3;
@@ -42,7 +41,10 @@ public class Player : MonoBehaviour
 	public void SetDia(Dialogue d)
 	{
 		if (!gui.currentDialogue)
+		{
 			gui.currentDialogue = d;
+			gui.dialoguePos = transform.position;
+		}
 	}
 	private void FixedUpdate()
 	{
@@ -71,14 +73,17 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
-		if(augChest && augHead && augLeg && augArm)
+		if (augChest && augHead && augLeg && augArm)
 		{
 			SceneManager.LoadScene("fullconversion");
 		}
 
 		swingCooldown -= Time.deltaTime;
-		if (Input.GetKeyDown(KeyCode.Q) && swingCooldown <0)
+		if (Input.GetKeyDown(KeyCode.Q) && swingCooldown < 0)
 		{
+			ac.SetTrigger("Punch");
+
+
 			swingCooldown = 1;
 			var healths = FindObjectsOfType<Health>();
 
@@ -96,23 +101,40 @@ public class Player : MonoBehaviour
 
 
 
+		if (Vector3.Distance(transform.position, gui.dialoguePos) > gui.maxDialogueDist)
+		{
+			gui.currentDialogue = null;
+		}
+
 		if (!gui.currentDialogue && Input.GetKeyUp(KeyCode.E))
 		{
+			gui.Hint = "Press E to Speak";
 			var dl = FindObjectsOfType<DialogueThing>();
 
-			var minDistance = 3f;
+			var minDistance = gui.maxDialogueDist;
 			Dialogue best = null;
 			foreach (var d in dl)
 			{
 				var dist = Vector3.Distance(transform.position, d.transform.position);
-				
-				if(dist < minDistance)
+
+				if (dist < minDistance)
 				{
 					best = d.dialogue;
 					minDistance = dist;
 				}
 			}
-			gui.currentDialogue = best;
+			SetDia(best);
+		}
+
+		else if (gui.currentDialogue)
+		{
+			gui.Hint = "press E for next";
+		}
+		else
+		{
+
+
+			gui.Hint = "put horizen here";
 		}
 
 
@@ -126,12 +148,12 @@ public class Player : MonoBehaviour
 
 
 		leg.enabled = augLeg;
-		
+
 		arm.enabled = augArm;
 		chest.enabled = augChest;
 		var rb = GetComponent<Rigidbody>();
 
-		rb.mass = augChest ? 100 : 50;
+		rb.mass = augChest ? 55 : 50;
 		Health.armor = augChest ? 0 : 1;
 
 		// reduce food consuption

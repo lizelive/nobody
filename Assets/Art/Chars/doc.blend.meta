@@ -6,7 +6,32 @@ ModelImporter:
   - first:
       74: -887982601649841707
     second: metarig|metarigAction
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: d4fa655b463e4384984b568043a52658, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 5d9e8cce81f571244a72e9eff8eba924, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: brass
+    second: {fileID: 2100000, guid: 9be95aa077652e74383b961f54c1d4f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leather
+    second: {fileID: 2100000, guid: 81ba225b22a3b6841982d25d94c194b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lense
+    second: {fileID: 2100000, guid: 4cc327c518f0ea54eac73f3b5f4b5b9a, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -11,16 +11,19 @@ public class Gui : MonoBehaviour
 	public Text dialogueText;
 	public Dialogue currentDialogue;
 	public GameObject dialogueGo;
+	public Text hintText;
+
+
+	public Vector3 dialoguePos = Vector3.zero;
+	public float maxDialogueDist = 5;
+
+	public string Hint { set { hintText.text = value; } }
 
 	// Start is called before the first frame update
 
 	// Update is called once per frame
 	void Update()
     {
-
-
-
-
 		dialogueGo.SetActive(currentDialogue);
 		if (currentDialogue) {
 			dialogueText.text = currentDialogue.text;
