@@ -63,20 +63,31 @@ public class MurderTutrle : MonoBehaviour
 		{
 
 
+		
+				rageBuild += Time.deltaTime;
 			if (Vector3.Angle(Vector3.up, transform.up) < 45)
 			{
-				rageBuild += Time.deltaTime;
-
 				if (rageBuild < rageTime-1)
 				{
 					var lookat = player.transform.position;
 					lookat.y = transform.position.y;
 					transform.LookAt(lookat);
 				}
-
+				if (rageBuild > rageTime)
+				{
+					rb.velocity = transform.forward * rageForce + Vector3.up;
+					rageBuild = 0;
+				}
 			}
 			else
 			{
+
+				if (rageBuild > rageTime)
+				{
+					GetComponent<Health>().Hurt(.1f);	
+					rageBuild = 0;
+				}
+
 				// play helpless wobble noises.
 			}
 
@@ -85,11 +96,7 @@ public class MurderTutrle : MonoBehaviour
 			// kill kill killl
 
 
-			if (rageBuild > rageTime)
-			{
-				rb.velocity = transform.forward * rageForce+Vector3.up;
-				rageBuild = 0;
-			}
+
 
 			//if (playerDistance < killRange)
 			//{

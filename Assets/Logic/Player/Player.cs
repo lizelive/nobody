@@ -17,13 +17,19 @@ public class Player : MonoBehaviour
 	public float baseDamage = 1;
 	public float superDamage = 3;
 
-
+	public float midairMovement = 0.5f;
+	public float walkSpeed = 0.5f;
 	public Gui gui;
 	// Start is called before the first frame update
-	void Start()
+	void lcok()
 	{
-
+		var wantedMode = CursorLockMode.Locked;
+		Cursor.lockState = wantedMode;
+		// Hide cursor when locking
+		Cursor.visible = (CursorLockMode.Locked != wantedMode);
 	}
+
+	
 	public float turnSpeed = 60;
 	public float moveForce = 1000;
 	public float jumpSpeed = 3;
@@ -56,8 +62,21 @@ public class Player : MonoBehaviour
 		var turn = Input.GetAxis("Horizontal");
 		transform.Rotate(0, turnSpeed * turn * Time.fixedDeltaTime, 0);
 
-		var movement = new Vector3(0, 0, Input.GetAxis("Vertical"));
-		var force = moveForce * Camera.main.transform.TransformVector(movement);
+		var movement = new Vector3(turn, 0, Input.GetAxis("Vertical"));
+		var force = Camera.main.transform.TransformVector(movement);
+		force.y = 0;
+		force = force.normalized;
+
+		if (force.magnitude > 0.1f)
+			transform.forward = force;
+
+
+		force *= moveForce;
+		if (Input.GetKey(KeyCode.LeftShift))
+			force *= walkSpeed;
+
+		if (!canJump)
+			force *= midairMovement;
 		var rb = GetComponent<Rigidbody>();
 		rb.AddForce(mul * force);
 
@@ -73,6 +92,7 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	private void Update()
 	{
+		lcok();
 		if (augChest && augHead && augLeg && augArm)
 		{
 			SceneManager.LoadScene("fullconversion");
@@ -87,7 +107,7 @@ public class Player : MonoBehaviour
 			swingCooldown = 1;
 			var healths = FindObjectsOfType<Health>();
 
-			var cool = Physics.OverlapSphere(transform.position, 2);
+			var cool = Physics.OverlapSphere(transform.position, 3);
 
 			foreach (var thing in cool)
 			{

@@ -21,7 +21,7 @@ public class GoodDoctor : MonoBehaviour
     {
         
     }
-
+	public bool doneSurgury;
     // Update is called once per frame
     void Update()
     {
@@ -31,6 +31,11 @@ public class GoodDoctor : MonoBehaviour
 		var playerDistance = Vector3.Distance(transform.position, player.transform.position);
 		if(playerDistance < 3 && Input.GetKeyDown(KeyCode.O))
 		{
+			if (!doneSurgury)
+			{
+				doneSurgury = true;
+				player.Health.food += 1;	
+			}
 			switch (free)
 			{
 				case Surgury.Leg:
